@@ -5,79 +5,570 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- PDF.js for PDF thumbnails and modal viewing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <style>
-        /* --- Your existing CSS from the attachment --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { overflow-x: hidden; color: #333; line-height: 1.6; }
-        section { min-height: 100vh; width: 100%; padding: 60px 20px; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        #hero { position: relative; display: flex; align-items: center; justify-content: center; color: white; text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)); }
-        #hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; z-index: -1; }
-        .hero-content { max-width: 800px; padding: 40px; background-color: rgba(0, 0, 0, 0.6); border-radius: 15px; animation: fadeIn 1.5s ease-in-out; }
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; }
-        .hero-content p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9; }
-        #table-section { background-color: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .section-title { text-align: center; margin-bottom: 40px; font-size: 2.5rem; color: #2c3e50; position: relative; }
-        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #4CAF50; margin: 15px auto; border-radius: 2px; }
-        #data-table { width: 85%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden; animation: slideUp 1s ease-out; }
-        #data-table th, #data-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #e0e0e0; }
-        #data-table th { background-color: #4CAF50; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
-        #data-table tr:nth-child(even) { background-color: #f2f2f2; }
-        #data-table tr:last-child td { border-bottom: none; }
-        #data-table tr:hover { background-color: #e9e9e9; }
-        #gallery { background-color: #e9f5ff; padding: 60px 20px; }
-        .search-container { position: relative; display: flex; justify-content: center; margin-bottom: 25px; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; }
-        #search-bar { width: 100%; padding: 15px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1rem; outline: none; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-        #search-bar:focus { border-color: #4CAF50; box-shadow: 0 2px 15px rgba(76, 175, 80, 0.2); }
-        .autocomplete-items { position: absolute; border: 1px solid #d4d4d4; border-bottom: none; border-top: none; z-index: 99; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; border-radius: 0 0 10px 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); background-color: white; }
-        .autocomplete-items div { padding: 12px 20px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #d4d4d4; transition: background-color 0.2s; }
-        .autocomplete-items div:hover { background-color: #f1f1f1; }
-        .autocomplete-active { background-color: #4CAF50 !important; color: #ffffff; }
-        .filter-buttons { display: flex; justify-content: center; margin-bottom: 30px; gap: 15px; flex-wrap: wrap; }
-        .filter-btn { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; font-weight: 500; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-        .filter-btn:hover { background-color: #45a049; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
-        .filter-btn.active { background-color: #2E7D32; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset; }
-        .gallery-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; padding: 20px; }
-        .gallery-item { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; }
-        .gallery-item:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
-        .thumbnail { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid #eee; }
-        .pdf-icon { width: 100%; height: 180px; background-color: #f8f8f8; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 50px; color: #e74c3c; border-bottom: 1px solid #eee; }
-        .pdf-icon span { font-size: 14px; margin-top: 10px; color: #777; }
-        .item-info { padding: 20px; text-align: center; }
-        .item-info h3 { margin-bottom: 8px; color: #333; font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .item-info p { color: #777; font-size: 0.9rem; font-weight: 500; }
-        .folder-tag { display: inline-block; padding: 3px 8px; background-color: #e9f5ff; color: #2c3e50; border-radius: 4px; font-size: 0.8rem; margin-top: 5px; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); overflow: auto; animation: fadeIn 0.3s; }
-        .modal-content { margin: auto; display: block; max-width: 90%; max-height: 80vh; margin-top: 5vh; animation: zoomIn 0.3s; box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3); border-radius: 5px; }
-        #pdf-viewer-container { display: none; text-align: center; }
-        #pdf-canvas { background: #fff; border-radius: 5px; box-shadow: 0 5px 30px rgba(0,0,0,0.3); max-width: 90vw; max-height: 70vh; cursor: grab; }
-        .close { position: absolute; top: 25px; right: 35px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
-        .close:hover { color: #f1f1f1; }
-        .caption { margin: 15px auto; display: block; width: 80%; text-align: center; color: #ccc; padding: 10px 0; font-size: 1.1rem; }
-        .loading { display: flex; justify-content: center; align-items: center; height: 200px; font-size: 1.2rem; color: #777; }
-        .spinner { border: 4px solid rgba(0, 0, 0, 0.1); border-radius: 50%; border-top: 4px solid #4CAF50; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-right: 15px; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zoomIn { from { transform: scale(0.9); } to { transform: scale(1); } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content p { font-size: 1.1rem; }
-            .section-title { font-size: 2rem; }
-            #data-table { width: 95%; font-size: 0.9rem; }
-            #data-table th, #data-table td { padding: 12px 15px; }
-            .gallery-container { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        body {
+            overflow-x: hidden;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        section {
+            min-height: 100vh;
+            width: 100%;
+            padding: 60px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* First Section - Hero with Photo Background */
+        #hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+        }
+        
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Second Section - Table */
+        #table-section {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #4CAF50;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        #data-table {
+            width: 85%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: slideUp 1s ease-out;
+        }
+        
+        #data-table th, #data-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        #data-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        #data-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        #data-table tr:hover {
+            background-color: #e9e9e9;
+        }
+        
+        /* Third Section - Gallery */
+        #gallery {
+            background-color: #e9f5ff;
+            padding: 60px 20px;
+        }
+        
+        .search-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #search-bar {
+            width: 100%;
+            padding: 15px 25px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #search-bar:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 2px 15px rgba(76, 175, 80, 0.2);
+        }
+        
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        
+        .autocomplete-items div {
+            padding: 12px 20px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+            transition: background-color 0.2s;
+        }
+        
+        .autocomplete-items div:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .autocomplete-active {
+            background-color: #4CAF50 !important;
+            color: #ffffff;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .filter-btn.active {
+            background-color: #2E7D32;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+        }
+        
+        /* Gallery Section */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* PDF Thumbnail Styles */
+        .pdf-thumbnail-container {
+            width: 100%;
+            height: 180px;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pdf-thumbnail {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .pdf-icon-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(231, 76, 60, 0.9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .item-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .item-info h3 {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .item-info p {
+            color: #777;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .folder-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #e9f5ff;
+            color: #2c3e50;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        /* Modal for expanded view */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            margin-top: 5vh;
+            animation: zoomIn 0.3s;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+        
+        /* Enhanced PDF Viewer Styles */
+        #pdf-viewer-container {
+            width: 100%;
+            height: 80vh;
+            overflow: auto;
+            margin: 5vh auto;
+            background-color: #525659;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        #pdf-canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* PDF Controls */
+        .pdf-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1001;
+        }
+
+        .pdf-control-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .pdf-control-btn:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .zoom-level {
+            color: white;
+            font-size: 16px;
+            min-width: 50px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loading indicator for PDF */
+        .pdf-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .pdf-loading .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 4px solid #4CAF50;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: #f1f1f1;
+        }
+        
+        .caption {
+            margin: 15px auto;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: #777;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #4CAF50;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            #data-table {
+                width: 95%;
+                font-size: 0.9rem;
+            }
+            
+            #data-table th, #data-table td {
+                padding: 12px 15px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .pdf-controls {
+                width: 90%;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+            }
+        }
+        
         @media (max-width: 480px) {
-            section { padding: 40px 15px; }
-            .hero-content { padding: 30px 20px; }
-            .hero-content h1 { font-size: 2rem; }
-            .section-title { font-size: 1.8rem; }
-            .filter-buttons { gap: 10px; }
-            .filter-btn { padding: 8px 15px; font-size: 0.85rem; }
-            .gallery-container { grid-template-columns: 1fr; }
+            section {
+                padding: 40px 15px;
+            }
+            
+            .hero-content {
+                padding: 30px 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -90,6 +581,7 @@
             <p>Specializing in tissue-based, blood-based, and MRI diagnostics</p>
         </div>
     </section>
+    
     <!-- Second Section - Table -->
     <section id="table-section">
         <h2 class="section-title">Research Publications</h2>
@@ -142,6 +634,7 @@
             </tbody>
         </table>
     </section>
+    
     <!-- Third Section - Gallery -->
     <section id="gallery">
         <h2 class="section-title">Research Documents</h2>
@@ -162,83 +655,102 @@
         </div>
         <div class="gallery-container" id="gallery-container"></div>
     </section>
+    
     <!-- Modal for expanded view -->
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
-        <img class="modal-content" id="img01" style="display:none;">
-        <div id="pdf-viewer-container" style="display:none; text-align:center;">
-            <div style="margin-bottom:10px;">
-                <button id="zoom-in" style="font-size:1.2rem;">+</button>
-                <button id="zoom-out" style="font-size:1.2rem;">-</button>
+        <img class="modal-content" id="img01">
+        <div id="pdf-viewer-container" style="display: none;">
+            <div class="pdf-loading">
+                <div class="spinner"></div>
+                <p>Loading PDF document...</p>
             </div>
-            <canvas id="pdf-canvas" style="background:#fff; border-radius:5px; box-shadow:0 5px 30px rgba(0,0,0,0.3);"></canvas>
+            <canvas id="pdf-canvas"></canvas>
+        </div>
+        <div class="pdf-controls" style="display: none;">
+            <button class="pdf-control-btn" id="zoom-out"><i class="fas fa-search-minus"></i></button>
+            <div class="zoom-level" id="zoom-level">100%</div>
+            <button class="pdf-control-btn" id="zoom-in"><i class="fas fa-search-plus"></i></button>
+            <button class="pdf-control-btn" id="prev-page"><i class="fas fa-arrow-left"></i></button>
+            <div class="zoom-level" id="page-num">1/1</div>
+            <button class="pdf-control-btn" id="next-page"><i class="fas fa-arrow-right"></i></button>
+            <button class="pdf-control-btn" id="download-pdf"><i class="fas fa-download"></i></button>
         </div>
         <div id="caption" class="caption"></div>
     </div>
+
     <script>
+        // Configure PDF.js worker path
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
         // Configuration
         const GITHUB_REPO = 'paraspatidar/satviki'; // Replace with your GitHub repo
         const BRANCH = 'main'; // Or your branch name
         const ACCESS_TOKEN = ''; // Optional: Only needed for private repos
-
+        
         // DOM Elements
         const galleryContainer = document.getElementById('gallery-container');
         const loadingState = document.getElementById('loading-state');
-
-        // PDF.js config
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        // Helper to generate PDF thumbnail
-        async function generatePDFThumbnail(pdfUrl) {
-            try {
-                const loadingTask = pdfjsLib.getDocument(pdfUrl);
-                const pdf = await loadingTask.promise;
-                const page = await pdf.getPage(1);
-                const viewport = page.getViewport({ scale: 0.3 });
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                await page.render({ canvasContext: context, viewport: viewport }).promise;
-                return canvas.toDataURL();
-            } catch (e) {
-                return null;
-            }
-        }
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('img01');
+        const captionText = document.getElementById('caption');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        
+        // PDF Viewer Variables
+        let pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.0,
+            maxScale = 3.0,
+            minScale = 0.5;
 
         // Fetch documents from GitHub
         async function fetchDocumentsFromGitHub() {
             try {
+                // Show loading state
                 loadingState.style.display = 'flex';
                 galleryContainer.innerHTML = '';
+                
+                // Fetch folder structure
                 const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/git/trees/${BRANCH}?recursive=1`;
                 const headers = ACCESS_TOKEN ? { 'Authorization': `token ${ACCESS_TOKEN}` } : {};
+                
                 const response = await fetch(apiUrl, { headers });
                 if (!response.ok) throw new Error('Failed to fetch repository structure');
+                
                 const data = await response.json();
+                
+                // Filter for our target folders and files
                 const targetFolders = ['tissue-based', 'blood-based', 'mri', 'other'];
                 const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
+                
                 const documents = data.tree
                     .filter(item => {
                         const pathParts = item.path.split('/');
+                        // Check if file is in one of our target folders
                         return pathParts.length === 2 && 
                                targetFolders.includes(pathParts[0]) && 
-                               allowedExtensions.some(ext => item.path.toLowerCase().endsWith(ext));
+                               allowedExtensions.some(ext => item.path.endsWith(ext));
                     })
                     .map(item => {
                         const [folder, filename] = item.path.split('/');
                         const extension = filename.split('.').pop().toLowerCase();
                         const name = filename.replace(/\.[^/.]+$/, '').replace(/-/g, ' ').replace(/_/g, ' ');
+                        
                         return {
                             name: name,
                             folder: folder,
                             extension: extension,
                             rawUrl: `https://raw.githubusercontent.com/${GITHUB_REPO}/${BRANCH}/${item.path}`,
-                            thumbnail: extension === 'pdf' ? null : 
+                            thumbnail: extension === 'pdf' ? 'pdf-icon' : 
                                      `https://raw.githubusercontent.com/${GITHUB_REPO}/${BRANCH}/${item.path}`
                         };
                     });
-                await initGallery(documents);
+                
+                // Initialize gallery with fetched documents
+                initGallery(documents);
+                
             } catch (error) {
                 console.error('Error fetching documents:', error);
                 galleryContainer.innerHTML = `
@@ -253,31 +765,25 @@
                 loadingState.style.display = 'none';
             }
         }
-
-        // Initialize the gallery (with PDF thumbnails)
-        async function initGallery(documents) {
+        
+        // Initialize the gallery with PDF thumbnails
+        function initGallery(documents) {
             galleryContainer.innerHTML = '';
-            for (const item of documents) {
+            
+            documents.forEach(item => {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
                 galleryItem.dataset.folder = item.folder;
                 galleryItem.dataset.name = item.name.toLowerCase();
-
+                
                 let thumbnailContent;
                 if (item.extension === 'pdf') {
-                    let thumbDataUrl = await generatePDFThumbnail(item.rawUrl);
-                    if (thumbDataUrl) {
-                        thumbnailContent = `<img src="${thumbDataUrl}" alt="${item.name}" class="thumbnail" loading="lazy">`;
-                    } else {
-                        thumbnailContent = `<div class="pdf-icon">
-                            <i class="fas fa-file-pdf"></i>
-                            <span>PDF Document</span>
-                        </div>`;
-                    }
+                    // Create container for PDF thumbnail
+                    thumbnailContent = `<div class="pdf-thumbnail-container" id="thumbnail-${item.name.replace(/\s+/g, '-')}"></div>`;
                 } else {
                     thumbnailContent = `<img src="${item.thumbnail}" alt="${item.name}" class="thumbnail" loading="lazy">`;
                 }
-
+                
                 galleryItem.innerHTML = `
                     ${thumbnailContent}
                     <div class="item-info">
@@ -286,34 +792,98 @@
                         <div class="folder-tag">${item.folder.replace('-', ' ')}</div>
                     </div>
                 `;
+                
                 galleryItem.addEventListener('click', () => openModal(item));
                 galleryContainer.appendChild(galleryItem);
-            }
+                
+                // Generate thumbnail for PDFs
+                if (item.extension === 'pdf') {
+                    const container = galleryItem.querySelector('.pdf-thumbnail-container');
+                    generatePdfThumbnail(item.rawUrl, container);
+                }
+            });
+            
+            // Initialize search and filter functionality
             initSearchAndFilter();
         }
 
+        // Generate PDF thumbnails
+        async function generatePdfThumbnail(pdfUrl, container) {
+            try {
+                // Load the PDF
+                const loadingTask = pdfjsLib.getDocument(pdfUrl);
+                const pdf = await loadingTask.promise;
+                
+                // Get the first page
+                const page = await pdf.getPage(1);
+                
+                // Set scale for thumbnail (0.5 means half size)
+                const viewport = page.getViewport({ scale: 0.5 });
+                
+                // Create canvas for thumbnail
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                
+                // Render PDF page to canvas
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+                
+                // Add thumbnail to container
+                canvas.classList.add('pdf-thumbnail');
+                container.innerHTML = '';
+                container.appendChild(canvas);
+                
+                // Add PDF icon overlay
+                const iconOverlay = document.createElement('div');
+                iconOverlay.classList.add('pdf-icon-overlay');
+                iconOverlay.innerHTML = '<i class="fas fa-file-pdf"></i>';
+                container.appendChild(iconOverlay);
+                
+            } catch (error) {
+                console.error('Error generating PDF thumbnail:', error);
+                // Fallback to PDF icon if thumbnail generation fails
+                container.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                        <i class="fas fa-file-pdf" style="font-size: 50px; color: #e74c3c;"></i>
+                        <span style="margin-top: 10px; font-size: 14px; color: #777;">PDF Document</span>
+                    </div>
+                `;
+            }
+        }
+        
         // Initialize search and filter functionality
         function initSearchAndFilter() {
+            // Search functionality with autocomplete
             let currentFocus = -1;
+            
             document.getElementById('search-bar').addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase();
                 const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
                 const autocompleteList = document.getElementById('autocomplete-list');
                 autocompleteList.innerHTML = '';
                 currentFocus = -1;
+                
                 if (searchTerm.length > 0) {
                     const uniqueSuggestions = new Set();
                     const items = document.querySelectorAll('.gallery-item');
+                    
                     items.forEach(item => {
                         const name = item.dataset.name;
                         const folder = item.dataset.folder;
+                        
                         if (name.includes(searchTerm)) {
                             if (activeFilter === 'all' || folder === activeFilter) {
                                 uniqueSuggestions.add(item.querySelector('h3').textContent);
                             }
                         }
                     });
+                    
                     const sortedSuggestions = Array.from(uniqueSuggestions).sort();
+                    
                     sortedSuggestions.forEach(suggestion => {
                         const suggestionElement = document.createElement('div');
                         suggestionElement.innerHTML = `<strong>${suggestion.substr(0, searchTerm.length)}</strong>${suggestion.substr(searchTerm.length)}`;
@@ -326,11 +896,15 @@
                         autocompleteList.appendChild(suggestionElement);
                     });
                 }
+                
                 filterItems(searchTerm, activeFilter);
             });
+            
+            // Keyboard navigation for autocomplete
             document.getElementById('search-bar').addEventListener('keydown', function(e) {
                 const autocompleteList = document.getElementById('autocomplete-list');
                 const items = autocompleteList.children;
+                
                 if (e.key === 'ArrowDown') {
                     currentFocus++;
                     addActive(items);
@@ -346,46 +920,57 @@
                     }
                 }
             });
+            
             function addActive(items) {
                 if (!items) return false;
                 removeActive(items);
+                
                 if (currentFocus >= items.length) currentFocus = 0;
                 if (currentFocus < 0) currentFocus = (items.length - 1);
+                
                 if (items[currentFocus]) {
                     items[currentFocus].classList.add('autocomplete-active');
                     items[currentFocus].scrollIntoView({ block: 'nearest' });
                 }
             }
+            
             function removeActive(items) {
                 for (let i = 0; i < items.length; i++) {
                     items[i].classList.remove('autocomplete-active');
                 }
             }
+            
+            // Close autocomplete when clicking elsewhere
             document.addEventListener('click', function(e) {
                 if (e.target.id !== 'search-bar') {
                     document.getElementById('autocomplete-list').innerHTML = '';
                 }
             });
+            
+            // Filter functionality
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
+                    
                     const filterType = this.dataset.filter;
                     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
                     filterItems(searchTerm, filterType);
                 });
             });
         }
-
+        
         // Filter items based on search term and folder filter
         function filterItems(searchTerm, filterType) {
             const items = document.querySelectorAll('.gallery-item');
+            
             items.forEach(item => {
                 const name = item.dataset.name;
                 const folder = item.dataset.folder;
                 const matchesSearch = name.includes(searchTerm.toLowerCase());
                 const matchesFilter = filterType === 'all' || folder === filterType;
+                
                 if (matchesSearch && matchesFilter) {
                     item.style.display = 'block';
                 } else {
@@ -393,33 +978,34 @@
                 }
             });
         }
-
-        // Modal functionality with PDF.js
-        const modal = document.getElementById('myModal');
-        const modalImg = document.getElementById('img01');
-        const pdfViewerContainer = document.getElementById('pdf-viewer-container');
-        const pdfCanvas = document.getElementById('pdf-canvas');
-        const captionText = document.getElementById('caption');
-        const closeBtn = document.getElementsByClassName('close')[0];
-        const zoomInBtn = document.getElementById('zoom-in');
-        const zoomOutBtn = document.getElementById('zoom-out');
-        let currentPdfUrl = null;
-        let currentPdf = null;
-        let currentScale = 1.0;
-
+        
+        // Enhanced openModal function with PDF viewer
         function openModal(item) {
             modal.style.display = "block";
             captionText.innerHTML = item.name;
+            
             if (item.extension === 'pdf') {
+                // Hide image viewer, show PDF viewer
                 modalImg.style.display = "none";
-                pdfViewerContainer.style.display = "block";
-                renderPDF(item.rawUrl, 1.0);
-                currentPdfUrl = item.rawUrl;
+                document.getElementById('pdf-viewer-container').style.display = "block";
+                document.querySelector('.pdf-controls').style.display = "flex";
+                
+                // Initialize PDF viewer
+                loadPdf(item.rawUrl);
+                
+                // Set up download button
+                document.getElementById('download-pdf').onclick = function() {
+                    window.open(item.rawUrl, '_blank');
+                };
             } else {
+                // Show image viewer, hide PDF viewer
                 modalImg.src = item.rawUrl;
                 modalImg.style.display = "block";
-                pdfViewerContainer.style.display = "none";
+                document.getElementById('pdf-viewer-container').style.display = "none";
+                document.querySelector('.pdf-controls').style.display = "none";
             }
+            
+            // Close modal when clicking outside content
             modal.onclick = function(e) {
                 if (e.target === modal) {
                     closeModal();
@@ -427,39 +1013,121 @@
             };
         }
 
-        function closeModal() {
-            modal.style.display = "none";
-            pdfCanvas.getContext('2d').clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
-            currentPdf = null;
-            currentPdfUrl = null;
+        // PDF Viewer Functions
+        function loadPdf(url) {
+            // Show loading message
+            document.querySelector('.pdf-loading').style.display = 'block';
+            document.getElementById('pdf-canvas').style.display = 'none';
+            
+            // Reset viewer state
+            pageNum = 1;
+            scale = 1.0;
+            
+            // Load the PDF
+            pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+                pdfDoc = pdfDoc_;
+                document.getElementById('page-num').textContent = `1/${pdfDoc.numPages}`;
+                document.querySelector('.pdf-loading').style.display = 'none';
+                document.getElementById('pdf-canvas').style.display = 'block';
+                
+                // Render the first page
+                renderPage(pageNum);
+            }).catch(function(error) {
+                document.querySelector('.pdf-loading').innerHTML = `
+                    <div style="color: #ff6b6b;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error loading PDF</p>
+                    </div>
+                `;
+                console.error('PDF loading error:', error);
+            });
         }
 
-        closeBtn.onclick = closeModal;
+        function renderPage(num) {
+            pageRendering = true;
+            
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({ scale: scale });
+                const canvas = document.getElementById('pdf-canvas');
+                const context = canvas.getContext('2d');
+                
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                
+                const renderTask = page.render(renderContext);
+                
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+            
+            document.getElementById('page-num').textContent = `${num}/${pdfDoc.numPages}`;
+            document.getElementById('zoom-level').textContent = `${Math.round(scale * 100)}%`;
+        }
 
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        // Close modal and clean up
+        function closeModal() {
+            modal.style.display = "none";
+            document.getElementById('pdf-viewer-container').style.display = "none";
+            document.querySelector('.pdf-controls').style.display = "none";
+            if (pdfDoc) {
+                pdfDoc.destroy();
+                pdfDoc = null;
+            }
+        }
+        
+        // Close with ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.style.display === 'block') {
                 closeModal();
             }
         });
+        
+        closeBtn.onclick = closeModal;
 
-        async function renderPDF(url, scale) {
-            currentScale = scale;
-            const loadingTask = pdfjsLib.getDocument(url);
-            currentPdf = await loadingTask.promise;
-            const page = await currentPdf.getPage(1);
-            const viewport = page.getViewport({ scale: currentScale });
-            pdfCanvas.height = viewport.height;
-            pdfCanvas.width = viewport.width;
-            await page.render({ canvasContext: pdfCanvas.getContext('2d'), viewport: viewport }).promise;
-        }
+        // PDF Control Event Listeners
+        document.getElementById('prev-page').addEventListener('click', function() {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        });
 
-        zoomInBtn.onclick = function() {
-            if (currentPdfUrl) renderPDF(currentPdfUrl, currentScale + 0.2);
-        };
-        zoomOutBtn.onclick = function() {
-            if (currentPdfUrl && currentScale > 0.4) renderPDF(currentPdfUrl, currentScale - 0.2);
-        };
+        document.getElementById('next-page').addEventListener('click', function() {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        });
 
+        document.getElementById('zoom-in').addEventListener('click', function() {
+            if (scale >= maxScale) return;
+            scale += 0.1;
+            renderPage(pageNum);
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', function() {
+            if (scale <= minScale) return;
+            scale -= 0.1;
+            renderPage(pageNum);
+        });
+
+        // Initialize the page
         window.onload = fetchDocumentsFromGitHub;
     </script>
 </body>
