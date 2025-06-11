@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satviki Patidar | Indore | Neuro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Satviki Patidar | Indore | Neuro</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<style>
         html { font-size: 16px; }
         body { overflow-x: hidden; color: #333; line-height: 1.6; background: #f8f9fa; }
         section { min-height: 100vh; width: 100%; padding: 60px 20px; }
@@ -25,6 +26,14 @@
         #data-table tr:nth-child(even) { background-color: #f2f2f2; }
         #data-table tr:last-child td { border-bottom: none; }
         #data-table tr:hover { background-color: #e9e9e9; }
+        
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden; animation: slideUp 1s ease-out; background: #fff; }
+        .data-table th, .data-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        .data-table th { background-color: #4CAF50; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        .data-table tr:nth-child(even) { background-color: #f2f2f2; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover { background-color: #e9e9e9; }
+        
         #gallery { background-color: #e9f5ff; padding: 60px 0; }
         .search-container { position: relative; display: flex; justify-content: center; margin-bottom: 25px; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; }
         #search-bar { width: 100%; padding: 15px 25px; border: 2px solid #ddd; border-radius: 30px; font-size: 1rem; outline: none; transition: all 0.3s; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
@@ -77,6 +86,9 @@
             .hero-content h1 { font-size: 2rem; }
             .hero-content p { font-size: 1rem; }
             .section-title { font-size: 1.5rem; }
+            .data-table th, .data-table td { padding: 10px 8px; font-size: 0.9rem; }
+            .data-table { font-size: 0.9rem; }
+            
             #data-table th, #data-table td { padding: 10px 8px; font-size: 0.9rem; }
             #data-table { font-size: 0.9rem; }
             .gallery-container { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
@@ -108,132 +120,196 @@
             .gallery-container { gap: 5px; }
             .thumbnail, .gallery-item img, .pdf-thumbnail-container { height: 80px; }
         }
-    </style>
+    
+html {
+  scroll-behavior: smooth;
+}
+body {
+  padding-top: 80px;
+}
+.navbar-link {
+  background-color: #ffffff33;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+.navbar-link:hover {
+  background-color: #ffffff55;
+}
+@media (max-width: 768px) {
+  #navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #navbar .container > div:last-child {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+}
+</style>
 </head>
-<body>
-    <!-- First Section - Hero with Photo Background -->
-    <section id="hero">
-        <div class="hero-content">
-            <h1>Satviki Patidar</h1>
-            <p>Please use the search option to search specific report.</p>
-            <p>You can select any specific category also for report/details by cliking that button like tissue-based, blood-based, MRI etc</p>
-            <p>You may click on any report/image and zoom or download it , or close it and view others.</p>
-            <p>At the end , there is a section for google drive folder which has some more files,dicom etc.</p>
-            <p>Feel free to contact +91-8826533558 for any further details.</p>
-        </div>
-    </section>
-    <!-- Second Section - Table -->
-    <section id="table-section">
-        <h3 class="section-title">Tissue Based Report Brief summary</h3>
-        <table id="data-table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Journal</th>
-                    <th>Year</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Blood Biomarkers in Early Detection</td>
-                    <td>Journal of Hematology</td>
-                    <td>2023</td>
-                    <td>Blood-Based</td>
-                </tr>
-                <tr>
-                    <td>Tissue Analysis Techniques</td>
-                    <td>Pathology Research</td>
-                    <td>2022</td>
-                    <td>Tissue-Based</td>
-                </tr>
-                <tr>
-                    <td>MRI Innovations in Diagnostics</td>
-                    <td>Radiology Today</td>
-                    <td>2023</td>
-                    <td>MRI</td>
-                </tr>
-                <tr>
-                    <td>Comprehensive Diagnostic Approaches</td>
-                    <td>Medical Science Review</td>
-                    <td>2021</td>
-                    <td>Other</td>
-                </tr>
-                <tr>
-                    <td>Circulating Tumor Cells Analysis</td>
-                    <td>Oncology Research</td>
-                    <td>2022</td>
-                    <td>Blood-Based</td>
-                </tr>
-                <tr>
-                    <td>Histopathological Patterns</td>
-                    <td>Journal of Pathology</td>
-                    <td>2023</td>
-                    <td>Tissue-Based</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <!-- Third Section - Gallery -->
-    <section id="gallery">
-        <h2 class="section-title">Research Documents</h2>
-        <div class="search-container">
-            <input type="text" id="search-bar" placeholder="Search documents..." autocomplete="off">
-            <div id="autocomplete-list" class="autocomplete-items"></div>
-        </div>
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All Documents</button>
-            <button class="filter-btn" data-filter="tissue-based">Tissue-Based</button>
-            <button class="filter-btn" data-filter="blood-based">Blood-Based</button>
-            <button class="filter-btn" data-filter="mri">MRI</button>
-            <button class="filter-btn" data-filter="other">Other</button>
-        </div>
-        <div id="loading-state" class="loading">
-            <div class="spinner"></div>
-            <span>Loading documents from GitHub...</span>
-        </div>
-        <div class="gallery-container" id="gallery-container"></div>
-    </section>
-    <!-- Fourth Section - Google Drive Folder -->
-    <section id="google-drive-folder" style="background-color: #ebeff2; padding: 60px 20px;">
-      <div class="container">
-        <h2 class="section-title">Google Drive Files</h2>
-        <p style="text-align: center; margin-bottom: 30px; color: #2c3e50; font-size: 1.1rem;">
-          Below is a view of additional files (e.g., DICOM, reports) stored in the public Google Drive folder.
-        </p>
-        <div style="display: flex; justify-content: center;">
-          <iframe 
-            src="https://drive.google.com/embeddedfolderview?id=1Z5QDCY0OsVRApW0kIwExpQVNNkrwQZiP#grid" 
-            style="width: 100%; max-width: 1000px; height: 600px; border: 2px solid #4CAF50; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-          </iframe>
-        </div>
-      </div>
-    </section>
+<body><nav id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"><div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; flex-wrap: wrap;"><div style="font-weight: bold; font-size: 1.2rem;">Satviki Patidar</div><div style="display: flex; gap: 15px; flex-wrap: wrap;"><a class="navbar-link" href="#hero">Home</a><a class="navbar-link" href="#table-section">Tissue analysis Summary</a><a class="navbar-link" href="#gallery">Reports & Docs</a><a class="navbar-link" href="#google-drive-folder">Google Drive</a></div></div></nav>
+<!-- First Section - Hero with Photo Background -->
+<section id="hero">
+<div class="hero-content">
+<h1>Satviki Patidar</h1>
+<p>Please use the search option to search specific report.</p>
+<p>You can select any specific category also for report/details by cliking that button like tissue-based, blood-based, MRI etc</p>
+<p>You may click on any report/image and zoom or download it , or close it and view others.</p>
+<p>At the end , there is a section for google drive folder which has some more files,dicom etc.</p>
+<p>Feel free to contact +91-8826533558 for any further details.</p>
+</div>
+</section>
+<!-- Second Section - Table -->
+<section id="table-section">
+<h3 class="section-title">Tissue Based Report Brief summary</h3>
+<table id="data-table1" class="data-table">
+<thead>
+<tr>
+<th>Advance Report</th>
+<th>Result</th>
+<th>Comment</th>
+</tr>
+</thead>
 
+<tbody>
+<tr>
+ <td><strong>NGS Pannel</strong></td>
+ <td><strong>DBN1/BRAF (Fussion) Positive</strong></td>
+  <td>Not Detected : ALK,ATRX,EGFR,FGFR1,FGFR2,FGFR3,H3-3A,IDH1,
+  IDH2,MET,MYB,MYBL1,NTRK1,NTRK2,NTRK3,RET,ROS1,TERT,
+TP53</td>
+ </tr>
+ <tr>
+ <td><strong>FISH</strong></td>
+ <td>1p/19q co-deletion Negative</td>
+ <td></td>
+ </tr>
+ <tr>
+ <td><strong>MGMT Methylation</strong></td>
+ <td>Negative</td>
+ <td>MGMT Promoter methylation</td>
+  </tr>
+ </tbody>
 
-    <!-- Modal for expanded view -->
-    <div id="myModal" class="modal">
-        <span class="close" id="modal-close-btn">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="pdf-viewer-container" style="display: none;">
-            <div class="pdf-loading">
-                <div class="spinner"></div>
-                <p>Loading PDF document...</p>
-            </div>
-            <canvas id="pdf-canvas"></canvas>
-        </div>
-        <div class="pdf-controls" style="display: none;">
-            <button class="pdf-control-btn" id="zoom-out"><i class="fas fa-search-minus"></i></button>
-            <div class="zoom-level" id="zoom-level">100%</div>
-            <button class="pdf-control-btn" id="zoom-in"><i class="fas fa-search-plus"></i></button>
-            <button class="pdf-control-btn" id="prev-page"><i class="fas fa-arrow-left"></i></button>
-            <div class="zoom-level" id="page-num">1/1</div>
-            <button class="pdf-control-btn" id="next-page"><i class="fas fa-arrow-right"></i></button>
-            <button class="pdf-control-btn" id="download-pdf"><i class="fas fa-download"></i></button>
-        </div>
-        <div id="caption" class="caption"></div>
-    </div>
-    <script>
+</table>
+
+<table id="data-table">
+<thead>
+<tr>
+<th>IHC Marker</th>
+<th>First Report</th>
+<th>Second Report</th>
+<th>Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+ <td><strong>IDH1 R132H</strong></td>
+ <td>Negative</td>
+ <td>Negative</td>
+ <td>Consistent (IDH-wildtype)</td>
+ </tr>
+ <tr>
+ <td><strong>ATRX</strong></td>
+ <td>Retained</td>
+ <td>Partially retained</td>
+ <td><strong>Discrepancy</strong>; partial retention may suggest mutation or mosaic pattern—needs clarification or repeat testing</td>
+ </tr>
+ <tr>
+ <td><strong>p53</strong></td>
+ <td>Variable intensity in ~15%</td>
+ <td>Focal weak, wild-type expression</td>
+ <td>Roughly similar—no strong overexpression</td>
+ </tr>
+ <tr>
+ <td><strong>Ki-67 / MIB-1</strong></td>
+ <td>1–2%</td>
+ <td>&lt; 1%</td>
+ <td>Both show <strong>very low proliferation</strong>, consistent with low-grade tumor</td>
+ </tr>
+ <tr>
+ <td><strong>Olig-2</strong></td>
+ <td>Positive</td>
+ <td>Negative</td>
+ <td><strong>Discrepancy</strong> – Olig-2 is usually positive in glial tumors; one report says yes, the other says no</td>
+</tr>
+<tr>
+<td><strong>GFAP, S100</strong></td>
+<td>Not mentioned</td>
+<td>Positive</td>
+<td>Support glial origin</td>
+</tr>
+<tr>
+<td><strong>SOX10</strong></td>
+<td>Not mentioned</td>
+<td>Positive</td>
+<td>Common in glial and some schwannian tumors</td>
+</tr>
+<tr>
+<td><strong>Synaptophysin, Chromogranin</strong></td>
+<td>Not mentioned / not significant</td>
+<td>Synaptophysin positive, Chromogranin negative</td>
+<td>Synaptophysin positivity can sometimes appear in glial tumors, especially pediatric or mixed lineages</td>
+</tr>
+<tr>
+<td><strong>CD34, TTF1, H3K27M, BRAF</strong></td>
+<td>Not mentioned or negative</td>
+<td>All negative</td>
+<td></td>
+</tr>
+ </tbody>
+
+</table>
+</section>
+<!-- Third Section - Gallery -->
+<section id="gallery">
+<h2 class="section-title">Research Documents</h2>
+<div class="search-container">
+<input autocomplete="off" id="search-bar" placeholder="Search documents..." type="text"/>
+<div class="autocomplete-items" id="autocomplete-list"></div>
+</div>
+<div class="filter-buttons">
+<button class="filter-btn active" data-filter="all">All Documents</button>
+<button class="filter-btn" data-filter="tissue-based">Tissue-Based</button>
+<button class="filter-btn" data-filter="blood-based">Blood-Based</button>
+<button class="filter-btn" data-filter="mri">MRI</button>
+<button class="filter-btn" data-filter="other">Other</button>
+</div>
+<div class="loading" id="loading-state">
+<div class="spinner"></div>
+<span>Loading documents from GitHub...</span>
+</div>
+<div class="gallery-container" id="gallery-container"></div>
+</section>
+<!-- Modal for expanded view -->
+<div class="modal" id="myModal">
+<span class="close" id="modal-close-btn">×</span>
+<img class="modal-content" id="img01"/>
+<div id="pdf-viewer-container" style="display: none;">
+<div class="pdf-loading">
+<div class="spinner"></div>
+<p>Loading PDF document...</p>
+</div>
+<canvas id="pdf-canvas"></canvas>
+</div>
+<div class="pdf-controls" style="display: none;">
+<button class="pdf-control-btn" id="zoom-out"><i class="fas fa-search-minus"></i></button>
+<div class="zoom-level" id="zoom-level">100%</div>
+<button class="pdf-control-btn" id="zoom-in"><i class="fas fa-search-plus"></i></button>
+<button class="pdf-control-btn" id="prev-page"><i class="fas fa-arrow-left"></i></button>
+<div class="zoom-level" id="page-num">1/1</div>
+<button class="pdf-control-btn" id="next-page"><i class="fas fa-arrow-right"></i></button>
+<button class="pdf-control-btn" id="download-pdf"><i class="fas fa-download"></i></button>
+</div>
+<div class="caption" id="caption"></div>
+</div>
+<script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
         const GITHUB_REPO = 'paraspatidar/satviki';
         const BRANCH = 'main';
@@ -557,5 +633,19 @@
         });
         window.onload = fetchDocumentsFromGitHub;
     </script>
+
+<!-- Fourth Section - Google Drive Folder -->
+<section id="google-drive-folder" style="background-color: #d0e1ee; padding: 60px 20px;">
+<div class="container">
+<h2 class="section-title">Google Drive Files</h2>
+<p style="text-align: center; margin-bottom: 30px; color: #2c3e50; font-size: 1.1rem;">
+      Below is a view of additional files (e.g., DICOM, reports) stored in the public Google Drive folder.
+    </p>
+<div style="display: flex; justify-content: center;">
+<iframe src="https://drive.google.com/embeddedfolderview?id=1Z5QDCY0OsVRApW0kIwExpQVNNkrwQZiP" style="width: 100%; max-width: 1000px; height: 600px; border: 2px solid #4CAF50; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+</iframe>
+</div>
+</div>
+</section>
 </body>
 </html>
