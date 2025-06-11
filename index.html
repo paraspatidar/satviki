@@ -27,6 +27,13 @@
         #data-table tr:last-child td { border-bottom: none; }
         #data-table tr:hover { background-color: #e9e9e9; }
         
+         #data-table1 { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden; animation: slideUp 1s ease-out; background: #fff; }
+        #data-table1 th, #data-table1 td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        #data-table1 th { background-color: #4CAF50; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
+        #data-table1 tr:nth-child(even) { background-color: #f2f2f2; }
+        #data-table1 tr:last-child td { border-bottom: none; }
+        #data-table1 tr:hover { background-color: #e9e9e9; }
+        
         .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden; animation: slideUp 1s ease-out; background: #fff; }
         .data-table th, .data-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #e0e0e0; }
         .data-table th { background-color: #4CAF50; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
@@ -89,6 +96,9 @@
             .data-table th, .data-table td { padding: 10px 8px; font-size: 0.9rem; }
             .data-table { font-size: 0.9rem; }
             
+            #data-table1 th, #data-table1 td { padding: 10px 8px; font-size: 0.9rem; }
+            #data-table1 { font-size: 0.9rem; }
+            
             #data-table th, #data-table td { padding: 10px 8px; font-size: 0.9rem; }
             #data-table { font-size: 0.9rem; }
             .gallery-container { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
@@ -150,9 +160,14 @@ body {
     margin-top: 10px;
   }
 }
+
+#data-table1 td, #data-table1 th {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
 </style>
 </head>
-<body><nav id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"><div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; flex-wrap: wrap;"><div style="font-weight: bold; font-size: 1.2rem;">Satviki Patidar</div><div style="display: flex; gap: 15px; flex-wrap: wrap;"><a class="navbar-link" href="#hero">Home</a><a class="navbar-link" href="#table-section">Tissue analysis Summary</a><a class="navbar-link" href="#gallery">Reports & Docs</a><a class="navbar-link" href="#google-drive-folder">Google Drive</a></div></div></nav>
+<body><nav id="navbar" style="position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"><div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; flex-wrap: wrap;"><div style="font-weight: bold; font-size: 1.2rem;">Satviki Patidar</div><div style="display: flex; gap: 15px; flex-wrap: wrap;"><a class="navbar-link" href="#hero">Home</a><a class="navbar-link" href="#table-section">Tissue analysis Summary</a><a class="navbar-link" href="#gallery">Reports &amp; Docs</a><a class="navbar-link" href="#google-drive-folder">Google Drive</a></div></div></nav>
 <!-- First Section - Hero with Photo Background -->
 <section id="hero">
 <div class="hero-content">
@@ -167,7 +182,7 @@ body {
 <!-- Second Section - Table -->
 <section id="table-section">
 <h3 class="section-title">Tissue Based Report Brief summary</h3>
-<table id="data-table1" class="data-table">
+<div style="overflow-x:auto;"><table  id="data-table1">
 <thead>
 <tr>
 <th>Advance Report</th>
@@ -175,29 +190,28 @@ body {
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
- <td><strong>NGS Pannel</strong></td>
- <td><strong>DBN1/BRAF (Fussion) Positive</strong></td>
-  <td>Not Detected : ALK,ATRX,EGFR,FGFR1,FGFR2,FGFR3,H3-3A,IDH1,
-  IDH2,MET,MYB,MYBL1,NTRK1,NTRK2,NTRK3,RET,ROS1,TERT,
-TP53</td>
- </tr>
- <tr>
- <td><strong>FISH</strong></td>
- <td>1p/19q co-deletion Negative</td>
- <td></td>
- </tr>
- <tr>
- <td><strong>MGMT Methylation</strong></td>
- <td>Negative</td>
- <td>MGMT Promoter methylation</td>
-  </tr>
- </tbody>
-
-</table>
-
+<td><strong>NGS Pannel</strong></td>
+<td><strong>DBN1/BRAF (Fussion) Positive</strong></td>
+<td>Not Detected : ALK,ATRX,EGFR,
+  FGFR1,FGFR2,FGFR3,H3-3A,IDH1,
+  IDH2,MET,MYB,MYBL1,
+  NTRK1,NTRK2,NTRK3,
+  RET,ROS1,TERT,TP53</td>
+</tr>
+<tr>
+<td><strong>FISH</strong></td>
+<td>1p/19q co-deletion Negative</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>MGMT Methylation</strong></td>
+<td>Negative</td>
+<td>MGMT Promoter methylation</td>
+</tr>
+</tbody>
+</table></div>
 <table id="data-table">
 <thead>
 <tr>
@@ -207,37 +221,36 @@ TP53</td>
 <th>Comment</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
- <td><strong>IDH1 R132H</strong></td>
- <td>Negative</td>
- <td>Negative</td>
- <td>Consistent (IDH-wildtype)</td>
- </tr>
- <tr>
- <td><strong>ATRX</strong></td>
- <td>Retained</td>
- <td>Partially retained</td>
- <td><strong>Discrepancy</strong>; partial retention may suggest mutation or mosaic pattern—needs clarification or repeat testing</td>
- </tr>
- <tr>
- <td><strong>p53</strong></td>
- <td>Variable intensity in ~15%</td>
- <td>Focal weak, wild-type expression</td>
- <td>Roughly similar—no strong overexpression</td>
- </tr>
- <tr>
- <td><strong>Ki-67 / MIB-1</strong></td>
- <td>1–2%</td>
- <td>&lt; 1%</td>
- <td>Both show <strong>very low proliferation</strong>, consistent with low-grade tumor</td>
- </tr>
- <tr>
- <td><strong>Olig-2</strong></td>
- <td>Positive</td>
- <td>Negative</td>
- <td><strong>Discrepancy</strong> – Olig-2 is usually positive in glial tumors; one report says yes, the other says no</td>
+<td><strong>IDH1 R132H</strong></td>
+<td>Negative</td>
+<td>Negative</td>
+<td>Consistent (IDH-wildtype)</td>
+</tr>
+<tr>
+<td><strong>ATRX</strong></td>
+<td>Retained</td>
+<td>Partially retained</td>
+<td><strong>Discrepancy</strong>; partial retention may suggest mutation or mosaic pattern—needs clarification or repeat testing</td>
+</tr>
+<tr>
+<td><strong>p53</strong></td>
+<td>Variable intensity in ~15%</td>
+<td>Focal weak, wild-type expression</td>
+<td>Roughly similar—no strong overexpression</td>
+</tr>
+<tr>
+<td><strong>Ki-67 / MIB-1</strong></td>
+<td>1–2%</td>
+<td>&lt; 1%</td>
+<td>Both show <strong>very low proliferation</strong>, consistent with low-grade tumor</td>
+</tr>
+<tr>
+<td><strong>Olig-2</strong></td>
+<td>Positive</td>
+<td>Negative</td>
+<td><strong>Discrepancy</strong> – Olig-2 is usually positive in glial tumors; one report says yes, the other says no</td>
 </tr>
 <tr>
 <td><strong>GFAP, S100</strong></td>
@@ -263,8 +276,7 @@ TP53</td>
 <td>All negative</td>
 <td></td>
 </tr>
- </tbody>
-
+</tbody>
 </table>
 </section>
 <!-- Third Section - Gallery -->
@@ -633,7 +645,6 @@ TP53</td>
         });
         window.onload = fetchDocumentsFromGitHub;
     </script>
-
 <!-- Fourth Section - Google Drive Folder -->
 <section id="google-drive-folder" style="background-color: #d0e1ee; padding: 60px 20px;">
 <div class="container">
