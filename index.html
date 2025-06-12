@@ -339,6 +339,7 @@ body {
 <button class="filter-btn" data-filter="tissue-based">Tissue-Based</button>
 <button class="filter-btn" data-filter="blood-based">Blood-Based</button>
 <button class="filter-btn" data-filter="mri">MRI</button>
+<button class="filter-btn" data-filter="opthal">Opthal</button>
 <button class="filter-btn" data-filter="other">Other</button>
 </div>
 <div class="loading" id="loading-state">
@@ -395,7 +396,7 @@ body {
                 const response = await fetch(apiUrl, { headers });
                 if (!response.ok) throw new Error('Failed to fetch repository structure');
                 const data = await response.json();
-                const targetFolders = ['tissue-based', 'blood-based', 'mri', 'other'];
+                const targetFolders = ['tissue-based', 'blood-based', 'mri','opthal','other'];
                 const allowedExtensions = ['.pdf', '.jpeg', '.jpg', '.png'];
                 const documents = data.tree
                     .filter(item => {
