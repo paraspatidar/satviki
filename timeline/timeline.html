@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient History Timeline & Seizure Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title-block">
+        <span class="pill">🧠 Pediatric Case • Visual Timeline</span>
+        <h1>Patient History & Seizure Control Journey</h1>
+        <p>
+          Month-wise view of symptoms, investigations, and interventions to help clinicians and parents quickly 
+          grasp the overall trajectory.
+        </p>
+        <div class="summary-chips">
+          <span class="chip"><strong>Sept 2023</strong> to <strong>Aug 2025</strong></span>
+          <span class="chip"><strong>Seizures:</strong> onset → control → auras</span>
+          <span class="chip"><strong>Focus:</strong> visual field & right hand function</span>
+        </div>
+      </div>
+      <div>
+        <div class="pill">📅 Scroll vertically month by month</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Timeline side -->
+      <section class="card">
+        <h2><span class="icon-circle">🩺</span>Timeline of Events</h2>
+        <p class="subtitle">Filter by type and scroll to move through the patient's journey.</p>
+
+        <div class="filter-bar" id="filterBar"></div>
+
+        <div class="timeline-wrap">
+          <div class="timeline" id="timeline"></div>
+          <div class="no-events" id="noEvents" style="display:none;">
+            No events found for this filter.
+          </div>
+        </div>
+      </section>
+
+      <!-- Chart side -->
+      <section class="card">
+        <h2><span class="icon-circle">📈</span>Seizure Frequency Trend</h2>
+        <p class="subtitle">Approximate monthly seizure frequency and key milestones.</p>
+
+        <div class="chart-header">
+          <p>Helps visualize effect of medication and surgery over time.</p>
+          <div class="legend">
+            <div class="legend-item"><span class="legend-color"></span> Seizures/month</div>
+            <div class="legend-item"><span class="legend-dot"></span> Key events</div>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="seizureChart" height="260"></canvas>
+        </div>
+
+        <footer class="note">
+          This is a simplified, approximate visualization based on provided notes. Not for use in formal
+          clinical decision-making.
+        </footer>
+      </section>
+    </div>
+
+    <footer class="note">
+      Disclaimer: This visualization is generated from patient history notes you provided and is intended only
+      for personal understanding and discussion with qualified medical professionals.
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
