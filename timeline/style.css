@@ -116,8 +116,7 @@
 
     @media (min-width: 960px) {
       .layout {
-        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-        align-items: flex-start;
+       grid-template-columns: 1fr;  /* keep 1 column even on desktop */
       }
     }
 
@@ -208,12 +207,10 @@
 
     /* Timeline */
     .timeline-wrap {
-      margin-top: 14px;
-      max-height: 70vh;
-      overflow-y: auto;
-      padding-right: 6px;
-      scrollbar-width: thin;
-      scrollbar-color: #334155 transparent;
+		  margin-top: 14px;
+		  max-height: none;      /* remove height limit */
+		  overflow-y: visible;   /* remove inner scrolling */
+		  padding-right: 0;      /* no inner scroll width padding */
     }
 
     .timeline-wrap::-webkit-scrollbar {
@@ -349,7 +346,7 @@
       flex-wrap: wrap;
       gap: 6px;
       margin: 4px 0 6px;
-      font-size: 0.72rem;
+      /* font-size: 0.72rem; */
       color: var(--muted);
     }
 
