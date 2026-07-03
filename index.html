@@ -722,13 +722,24 @@ body {
 </div>
 </div>
 </section>
-    <script>
-  window.PAGE_AGENT_CONFIG = {
-    locale: 'en-US',
-    language: 'en-US'
-  };
+ <script src="https://cdn.jsdelivr.net/npm/page-agent@1.8.0/dist/iife/page-agent.demo.js?autoInit=false" defer crossorigin="true"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.PageAgent) {
+      const agent = new window.PageAgent({
+        language: 'en-US',
+        locale: 'en-US'
+      });
+      
+      // Forces the floating panel UI to render on the screen
+      agent.panel.show();
+      console.log("Page Agent successfully initialized in English!");
+    } else {
+      console.error("Page Agent script failed to load.");
+    }
+  });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/page-agent@1.10.0/dist/iife/page-agent.demo.js" defer crossorigin="true"></script>
 </body>
 </html>
 
