@@ -62,6 +62,14 @@
         .filter-btn { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; font-weight: 500; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
         .filter-btn:hover { background-color: #45a049; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
         .filter-btn.active { background-color: #2E7D32; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset; }
+        .year-toggle { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 0 auto 14px; }
+        .scope-btn { padding: 15px 30px; background-color: #ffffff; color: #2c3e50; border: 2px solid #4CAF50; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-size: 1.1rem; font-weight: 600; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); min-width: 220px; text-align: center; }
+        .scope-btn:hover { background-color: #f1fbf2; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); }
+        .scope-btn.active { background-color: #2E7D32; color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset; }
+        .scope-caption { text-align: center; font-weight: 600; color: #2c3e50; margin-bottom: 20px; }
+        .report-scope-note { text-align: center; color: #5f6b78; margin: -10px auto 18px; max-width: 760px; }
+        .year-tag { display: inline-block; padding: 3px 8px; background-color: #eef7ff; color: #1f5f8b; border-radius: 4px; font-size: 0.78rem; margin-top: 8px; margin-right: 6px; font-weight: 600; }
+        .empty-state { display: none; text-align: center; width: calc(100% - 40px); margin: 10px 20px 0; padding: 28px 16px; color: #5f6b78; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); }
         .gallery-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; padding: 20px; }
         .gallery-item { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; }
         .gallery-item:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
@@ -112,6 +120,7 @@
             #data-table { font-size: 0.9rem; }
             .gallery-container { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
             .thumbnail, .gallery-item img, .pdf-thumbnail-container { height: 120px; }
+            .scope-btn { width: 100%; max-width: 320px; }
             #pdf-viewer-container {
                 max-width: 100vw;
                 margin: 0;
@@ -181,7 +190,7 @@ body {
 <section id="hero">
 <div class="hero-content">
 <h1>Satviki Patidar</h1>
-<p>Please use the search option to search specific report.</p>
+<p>Please use the Year first then search option to search specific report.</p>
 <p>You can select any specific category also for report/details by cliking that button like tissue-based, blood-based, MRI etc</p>
 <p>You may click on any report/image and zoom or download it , or close it and view others.</p>
 <p>At the end , there is a section for google drive folder which has some more files,dicom etc.</p>
@@ -190,160 +199,94 @@ body {
 </section>
 <!-- Second Section - Table -->
 <section id="table-section">
-<h3 class="section-title">Tissue Based Report Brief summary</h3>
-<div style="overflow-x:auto;"><table  id="data-table1">
+<h3 class="section-title">Case History Till Date Summary</h3>
+<div style="overflow-x:auto; margin-bottom: 28px;">
+<table class="data-table" id="case-history-table">
 <thead>
 <tr>
-<th>Advance Report</th>
-<th>Result</th>
-<th>Comment</th>
+<th>Timeline / Period</th>
+<th>Clinical / Diagnostic Update</th>
+<th>Remark /Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>NGS Pannel</strong></td>
-<td><strong>DBN1/BRAF (Fussion) Positive</strong></td>
-<td>Not Detected : ALK,ATRX,EGFR,
-  FGFR1,FGFR2,FGFR3,H3-3A,IDH1,
-  IDH2,MET,MYB,MYBL1,
-  NTRK1,NTRK2,NTRK3,
-  RET,ROS1,TERT,TP53</td>
+<td>2023 Ending</td>
+<td>Initial focal seizure episode.increating frequency(once a month to once a week)</td>
+<td>Aura of burning smell, urge of vomiting(but no vomiting) , increating sympthom to lip smacking</td>
 </tr>
 <tr>
-<td><strong>FISH</strong></td>
-<td>1p/19q co-deletion Negative</td>
-<td></td>
+<td>Jan 2024</td>
+<td>Consulted Neurologist , MRI done.Tumour detected</td>
+<td>Started Waith and Watch on Tumor based on Neurosurgeons Opinions, Started various epilepsy medicine to stop focal seizure.</option> </td>
 </tr>
 <tr>
-<td><strong>MGMT Methylation</strong></td>
-<td>Negative</td>
-<td>MGMT Promoter methylation</td>
+<td>Feb 2024</td>
+<td>Consulted Opthal , right side homonymous hemianopia , no vision glass</td>
+<td>No Glasses</option> </td>
 </tr>
 <tr>
-<td><strong>Germline NF1 NF2</strong></td>
-<td>Negative</td>
-<td>Germline NF1 NF2 (Neurofibromatosis)</td>
+<td>August 2024</td>
+<td>Finally ended up with Serizure medicine that work and became seizure-free</td>
+<td>Clobazam  & Carbamazepine </td>
+</tr>
+<tr>
+<td>Sept 2024</td>
+<td>Vision and eye squint</td>
+<td>vision degraded (major impact on left eye), and the left eye intermittent exotropia.</td>
+</tr>
+<tr>
+<td>Jan 2025</td>
+<td>Right Hand Grip week</td>
+<td>Granular controlle over righ fingure was lossing.</td>
+</tr>
+<tr>
+<td>April 2025</td>
+<td>Left pterional craniotomy </td>
+<td>Around 20% Tumour was removed, 80% still left.Waiting for Onco Reports</td>
+</tr>
+<tr>
+<td>October 2025 to Feb 2026</td>
+<td>Tovorafenib Phase 2 Trial and Epilicpy Medicin change path </td>
+<td>Tappered,Switched to Lacosamide ,Brivaracetam and Clobazam .</td>
+</tr>
+<tr>
+<td>March 2026 </td>
+<td>Started Tovorafenib 350 Mg once a week, neurological degradation happened </td>
+<td>Raised ICP , Brain stemp compression , Obstructive Hydrocephalus</td>
+</tr>
+<tr>
+<td>April 2026 </td>
+<td>VP Shunt and Craniotomy done to relieve raised ICP and brain stemp pressure </td>
+<td>Suspected episode of Neuropraxia / Stroke ,Right side Hemiparesis , Unconsious</td>
+</tr>
+<tr>
+<td>June 2026 </td>
+<td>On way to recovery, Tumour new reports came </td>
+<td>Consious, Walking , talking , memory retained , still under recovery path for speech, hand , face</td>
 </tr>
 </tbody>
 </table></div>
-<table id="data-table">
-<thead>
-<tr>
-<th>IHC Marker</th>
-<th>Dr Anita-COP Report</th>
-<th>Tata Memorial</th>
-<th>Neuberg Supratech</th>
-</tr>
-</thead>
- <tbody>
-    <tr>
-      <td>Tumor Morphology</td>
-      <td>Astrocytic morphology, glial tumor</td>
-      <td>Glial tumor</td>
-      <td>Low-grade glial neoplasm</td>
-    </tr>
-    <tr>
-      <td>Cellularity & Pleomorphism</td>
-      <td>Increased cellularity & nuclear pleomorphism</td>
-      <td>Not mentioned</td>
-      <td>Not mentioned</td>
-    </tr>
-    <tr>
-      <td>Mitosis</td>
-      <td>Inconspicuous</td>
-      <td>Not mentioned</td>
-      <td>Not seen</td>
-    </tr>
-    <tr>
-      <td>Necrosis</td>
-      <td>Not seen</td>
-      <td>Not mentioned</td>
-      <td>Not seen</td>
-    </tr>
-    <tr>
-      <td>Microvascular Proliferation</td>
-      <td>Not seen</td>
-      <td>Not mentioned</td>
-      <td>Not seen</td>
-    </tr>
-    <tr>
-      <td>Olig2</td>
-      <td>Positive</td>
-      <td>Positive</td>
-      <td>Negative</td>
-    </tr>
-    <tr>
-      <td>IDH1 R132H</td>
-      <td>Negative</td>
-      <td>Negative</td>
-      <td>Negative</td>
-    </tr>
-    <tr>
-      <td>ATRX</td>
-      <td>Retained</td>
-      <td>Retained</td>
-      <td>Partially retained nuclear expression</td>
-    </tr>
-    <tr>
-      <td>H3K27me3</td>
-      <td>Retained</td>
-      <td>Underexpressed</td>
-      <td>Not tested</td>
-    </tr>
-    <tr>
-      <td>H3K27M</td>
-      <td>Not tested</td>
-      <td>Negative</td>
-      <td>Negative</td>
-    </tr>
-    <tr>
-      <td>EZHIP</td>
-      <td>Not tested</td>
-      <td>Negative</td>
-      <td>Not tested</td>
-    </tr>
-    <tr>
-      <td>P53</td>
-      <td>~15% cells, variable intensity</td>
-      <td>Few cells positive (wild-type pattern)</td>
-      <td>Focal weak (wild-type pattern)</td>
-    </tr>
-    <tr>
-      <td>Ki-67 / MIB-1</td>
-      <td>1–2%</td>
-      <td>3–5% in highest proliferating areas</td>
-      <td>&lt; 1%</td>
-    </tr>
-    <tr>
-      <td>GFAP, S100, Synaptophysin, SOX10</td>
-      <td>Not tested</td>
-      <td>Not mentioned</td>
-      <td>All positive</td>
-    </tr>
-    <tr>
-      <td>Chromogranin, CD34, TTF1</td>
-      <td>Not tested</td>
-      <td>Not tested</td>
-      <td>All negative</td>
-    </tr>
-    <tr>
-      <td>MTAP</td>
-      <td>Not tested</td>
-      <td>Positive</td>
-      <td>Not tested</td>
-    </tr>
-    <tr>
-      <td>p16</td>
-      <td>Not tested</td>
-      <td>Many cells positive</td>
-      <td>Not tested</td>
-    </tr>
-  </tbody>
-</table>
+<h3 class="section-title">Tissue Based Report Brief Summary </h3>
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 40px 0;">
+  <a href="tumourdetails2026.html" style="display: inline-block; padding: 15px 40px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3); transition: all 0.3s ease;">
+    <i class="fas fa-file-medical" style="margin-right: 10px;"></i>View Tumour Details Report (2026)
+  </a>
+
+    <a href="tumourdetails2025.html" style="display: inline-block; padding: 15px 40px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3); transition: all 0.3s ease;">
+    <i class="fas fa-file-medical" style="margin-right: 10px;"></i>View Tumour Details Report (2025)
+  </a>
+</div>
 </section>
 <!-- Third Section - Gallery -->
 <section id="gallery">
 <h2 class="section-title">Research Documents</h2>
+<p class="report-scope-note">Choose the case-report year first. The folder tabs below stay the same for both groups.</p>
+<div class="year-toggle" id="year-toggle">
+<button class="scope-btn active" data-scope="2026">2026 Case reports</button>
+<button class="scope-btn" data-scope="2024-2025">2024-2025 case reports</button>
+</div>
+<div class="scope-caption" id="scope-caption">Showing 2026 Case reports</div>
 <div class="search-container">
 <input autocomplete="off" id="search-bar" placeholder="Search documents..." type="text"/>
 <div class="autocomplete-items" id="autocomplete-list"></div>
@@ -361,6 +304,7 @@ body {
 <div class="spinner"></div>
 <span>Loading documents from GitHub...</span>
 </div>
+<div class="empty-state" id="gallery-empty-state">No documents match the selected year and folder.</div>
 <div class="gallery-container" id="gallery-container"></div>
 </section>
 <!-- Modal for expanded view -->
@@ -396,7 +340,13 @@ body {
         const modalImg = document.getElementById('img01');
         const captionText = document.getElementById('caption');
         const closeBtn = document.getElementById('modal-close-btn');
+        const galleryEmptyState = document.getElementById('gallery-empty-state');
+        const scopeCaption = document.getElementById('scope-caption');
         let pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 1.0, maxScale = 3.0, minScale = 0.5;
+        let selectedScope = '2026';
+        let currentSearchTerm = '';
+        let currentFilter = 'all';
+        let allDocuments = [];
 
         function isMobile() {
             return window.innerWidth <= 600 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -416,23 +366,31 @@ body {
                 const documents = data.tree
                     .filter(item => {
                         const pathParts = item.path.split('/');
-                        return pathParts.length === 2 && 
-                               targetFolders.includes(pathParts[0]) && 
+                        const is2026 = pathParts[0] === '2026';
+                        const folder = is2026 ? pathParts[1] : pathParts[0];
+                        const filename = is2026 ? pathParts[2] : pathParts[1];
+                        return Boolean(folder) && Boolean(filename) &&
+                               targetFolders.includes(folder) && 
                                allowedExtensions.some(ext => item.path.endsWith(ext));
                     })
                     .map(item => {
-                        const [folder, filename] = item.path.split('/');
+                        const pathParts = item.path.split('/');
+                        const year = pathParts[0] === '2026' ? '2026' : '2024-2025';
+                        const folder = year === '2026' ? pathParts[1] : pathParts[0];
+                        const filename = year === '2026' ? pathParts[2] : pathParts[1];
                         const extension = filename.split('.').pop().toLowerCase();
                         const name = filename.replace(/\.[^/.]+$/, '').replace(/-/g, ' ').replace(/_/g, ' ');
                         return {
                             name: name,
                             folder: folder,
+                            year: year,
                             extension: extension,
                             rawUrl: `https://raw.githubusercontent.com/${GITHUB_REPO}/${BRANCH}/${item.path}`,
                             thumbnail: extension === 'pdf' ? 'pdf-icon' : 
                                      `https://raw.githubusercontent.com/${GITHUB_REPO}/${BRANCH}/${item.path}`
                         };
                     });
+                allDocuments = documents;
                 initGallery(documents);
             } catch (error) {
                 console.error('Error fetching documents:', error);
@@ -454,6 +412,7 @@ body {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
                 galleryItem.dataset.folder = item.folder;
+                galleryItem.dataset.year = item.year;
                 galleryItem.dataset.name = item.name.toLowerCase();
                 let thumbnailContent;
                 if (item.extension === 'pdf') {
@@ -466,6 +425,7 @@ body {
                     <div class="item-info">
                         <h3>${item.name}</h3>
                         <p>${item.extension.toUpperCase()} File</p>
+                        <div class="year-tag">${item.year} Case reports</div>
                         <div class="folder-tag">${item.folder.replace('-', ' ')}</div>
                     </div>
                 `;
@@ -476,7 +436,9 @@ body {
                     generatePdfThumbnail(item.rawUrl, container);
                 }
             });
+            initScopeToggle();
             initSearchAndFilter();
+            filterItems(currentSearchTerm, currentFilter);
         }
         async function generatePdfThumbnail(pdfUrl, container) {
             try {
@@ -508,18 +470,19 @@ body {
         function initSearchAndFilter() {
             let currentFocus = -1;
             document.getElementById('search-bar').addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                currentSearchTerm = e.target.value.toLowerCase();
+                const activeFilter = currentFilter;
                 const autocompleteList = document.getElementById('autocomplete-list');
                 autocompleteList.innerHTML = '';
                 currentFocus = -1;
-                if (searchTerm.length > 0) {
+                if (currentSearchTerm.length > 0) {
                     const uniqueSuggestions = new Set();
                     const items = document.querySelectorAll('.gallery-item');
                     items.forEach(item => {
                         const name = item.dataset.name;
                         const folder = item.dataset.folder;
-                        if (name.includes(searchTerm)) {
+                        const year = item.dataset.year;
+                        if (year === selectedScope && name.includes(currentSearchTerm)) {
                             if (activeFilter === 'all' || folder === activeFilter) {
                                 uniqueSuggestions.add(item.querySelector('h3').textContent);
                             }
@@ -528,17 +491,18 @@ body {
                     const sortedSuggestions = Array.from(uniqueSuggestions).sort();
                     sortedSuggestions.forEach(suggestion => {
                         const suggestionElement = document.createElement('div');
-                        suggestionElement.innerHTML = `<strong>${suggestion.substr(0, searchTerm.length)}</strong>${suggestion.substr(searchTerm.length)}`;
+                        suggestionElement.innerHTML = `<strong>${suggestion.substr(0, currentSearchTerm.length)}</strong>${suggestion.substr(currentSearchTerm.length)}`;
                         suggestionElement.innerHTML += `<input type='hidden' value='${suggestion}'>`;
                         suggestionElement.addEventListener('click', function() {
                             document.getElementById('search-bar').value = suggestion;
+                            currentSearchTerm = suggestion.toLowerCase();
                             autocompleteList.innerHTML = '';
-                            filterItems(suggestion, activeFilter);
+                            filterItems(currentSearchTerm, activeFilter);
                         });
                         autocompleteList.appendChild(suggestionElement);
                     });
                 }
-                filterItems(searchTerm, activeFilter);
+                filterItems(currentSearchTerm, activeFilter);
             });
             document.getElementById('search-bar').addEventListener('keydown', function(e) {
                 const autocompleteList = document.getElementById('autocomplete-list');
@@ -584,24 +548,46 @@ body {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
                     const filterType = this.dataset.filter;
-                    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-                    filterItems(searchTerm, filterType);
+                    currentFilter = filterType;
+                    currentSearchTerm = document.getElementById('search-bar').value.toLowerCase();
+                    filterItems(currentSearchTerm, filterType);
+                });
+            });
+        }
+        function initScopeToggle() {
+            const scopeButtons = document.querySelectorAll('.scope-btn');
+            scopeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    scopeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedScope = this.dataset.scope;
+                    scopeCaption.textContent = selectedScope === '2026' ? 'Showing 2026 Case reports' : 'Showing 2024-2025 case reports';
+                    document.getElementById('autocomplete-list').innerHTML = '';
+                    currentSearchTerm = document.getElementById('search-bar').value.toLowerCase();
+                    filterItems(currentSearchTerm, currentFilter);
                 });
             });
         }
         function filterItems(searchTerm, filterType) {
             const items = document.querySelectorAll('.gallery-item');
+            let visibleCount = 0;
             items.forEach(item => {
                 const name = item.dataset.name;
                 const folder = item.dataset.folder;
+                const year = item.dataset.year;
                 const matchesSearch = name.includes(searchTerm.toLowerCase());
+                const matchesScope = year === selectedScope;
                 const matchesFilter = filterType === 'all' || folder === filterType;
-                if (matchesSearch && matchesFilter) {
+                if (matchesSearch && matchesFilter && matchesScope) {
                     item.style.display = 'block';
+                    visibleCount += 1;
                 } else {
                     item.style.display = 'none';
                 }
             });
+            if (galleryEmptyState) {
+                galleryEmptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
         }
         function openModal(item) {
             modal.style.display = "block";
@@ -722,11 +708,11 @@ body {
 </div>
 </div>
 </section>
-<script
+<!-- <script
   src="https://cdn.jsdelivr.net/npm/page-agent@1.8.0/dist/iife/page-agent.demo.js?lang=en-US"
   defer
   crossorigin="true">
-</script>
+</script> -->
 </body>
 </html>
 
