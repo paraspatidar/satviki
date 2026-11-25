@@ -1,0 +1,323 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Case Timeline 2023–2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: hero, proportional phase strip, then one card per phase; each event = illustrated tile on a spine + full detail text */
+:root{
+  --bg:#f3f6fa; --card:#ffffff; --fg:#14202f; --muted:#556072; --line:#d3dae4;
+  --symptom:#b86e00; --test:#1b66c9; --treat:#6a42c4; --crisis:#c22b38; --recover:#17835a;
+  --symptom-bg:#fdecd0; --test-bg:#dce9fa; --treat-bg:#ebe4fa; --crisis-bg:#fbdde0; --recover-bg:#d6f0e3;
+  --f-head:'Space Grotesk',system-ui,sans-serif; --f-body:'Inter',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e131b; --card:#171e29; --fg:#e8edf4; --muted:#9ba6b6; --line:#2b3544;
+  --symptom:#f2ab40; --test:#6eaaf7; --treat:#aa8ff2; --crisis:#f47680; --recover:#52d198;
+  --symptom-bg:#3a2a10; --test-bg:#16304f; --treat-bg:#2a2249; --crisis-bg:#411d22; --recover-bg:#143c29;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e131b; --card:#171e29; --fg:#e8edf4; --muted:#9ba6b6; --line:#2b3544;
+  --symptom:#f2ab40; --test:#6eaaf7; --treat:#aa8ff2; --crisis:#f47680; --recover:#52d198;
+  --symptom-bg:#3a2a10; --test-bg:#16304f; --treat-bg:#2a2249; --crisis-bg:#411d22; --recover-bg:#143c29;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;margin:0;
+  padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:860px;margin:0 auto}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.ill{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.hero{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.hero .mark{width:64px;height:64px;border-radius:18px;background:var(--treat-bg);color:var(--treat);display:grid;place-items:center;font-size:38px;flex:none}
+h1{font-family:var(--f-head);font-size:clamp(24px,5vw,34px);line-height:1.1;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0;font-size:14px}
+
+.c-symptom{--c:var(--symptom);--cb:var(--symptom-bg)} .c-test{--c:var(--test);--cb:var(--test-bg)}
+.c-treat{--c:var(--treat);--cb:var(--treat-bg)} .c-crisis{--c:var(--crisis);--cb:var(--crisis-bg)} .c-recover{--c:var(--recover);--cb:var(--recover-bg)}
+
+.strip{display:flex;gap:4px}
+.strip a{min-width:0;color:inherit;text-decoration:none}
+.strip .seg{height:34px;border-radius:8px;display:grid;place-items:center;font-size:19px;background:var(--cb);color:var(--c);border:2px solid var(--c)}
+.strip .lbl{font-size:11px;font-weight:600;margin-top:5px;line-height:1.2;color:var(--muted);overflow-wrap:anywhere;text-align:center}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:8px 0 18px;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.legend button{font:inherit;font-size:13px;font-weight:500;display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;cursor:pointer;background:var(--card);color:var(--fg);border:1.5px solid var(--line)}
+.legend button i{width:12px;height:12px;border-radius:4px;background:var(--cb);border:2px solid var(--c,var(--muted));display:inline-block}
+.legend button em{font-style:normal;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend button:hover{border-color:var(--c,var(--muted))}
+.legend button[aria-pressed="true"]{background:var(--cb,var(--fg));border-color:var(--c,var(--fg));color:var(--c,var(--bg));font-weight:600}
+.legend button[aria-pressed="true"] em{color:inherit}
+.legend button:focus-visible{outline:2px solid var(--test);outline-offset:2px}
+.legend button.all[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.legend button.all i{background:conic-gradient(var(--symptom) 0 20%,var(--test) 0 40%,var(--treat) 0 60%,var(--crisis) 0 80%,var(--recover) 0);border:0}
+.strip a.off{opacity:.3}
+.empty{color:var(--muted);text-align:center;padding:24px}
+
+.phase{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:18px;overflow:hidden;scroll-margin-top:12px}
+.phase>h2{margin:0;padding:14px 16px;display:flex;align-items:center;gap:12px;background:var(--cb);color:var(--c);font-family:var(--f-head);font-size:18px;line-height:1.2}
+.phase>h2 .big{font-size:28px;display:flex}
+.phase>h2 small{display:block;font-family:var(--f-body);font-weight:500;font-size:12px;color:var(--muted);margin-top:2px}
+.evs{padding:18px 16px 4px}
+.ev{display:grid;grid-template-columns:84px 1fr;gap:0 14px;position:relative}
+.ev::before{content:"";position:absolute;left:41px;top:0;bottom:0;width:2px;background:var(--line)}
+.ev:first-child::before{top:42px}
+.ev:last-child::before{bottom:calc(100% - 42px)}
+.art{position:relative;width:84px;height:84px;border-radius:18px;background:var(--cb);color:var(--c);padding:10px;box-shadow:0 0 0 5px var(--card)}
+.ev .t{padding:2px 0 20px;min-width:0;min-height:104px}
+.ev .d{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+.ev strong{display:block;font-weight:600;font-size:15.5px;text-wrap:balance}
+.ev p{margin:3px 0 0;color:var(--muted);font-size:13.5px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.chips span{font-size:12px;font-weight:500;padding:2px 9px;border-radius:999px;background:var(--cb);color:var(--c)}
+
+.now{display:flex;align-items:center;gap:14px;background:var(--recover-bg);color:var(--recover);border-radius:16px;padding:16px}
+.now .big{font-size:34px}
+.now h3{font-family:var(--f-head);font-size:16px;margin:0 0 2px;color:var(--fg)}
+.now p{margin:0;color:var(--muted);font-size:13.5px}
+@media (max-width:480px){
+  .strip .lbl{font-size:10px}.strip .seg{height:30px;font-size:16px}
+  .ev{grid-template-columns:64px 1fr;gap:0 12px}.ev::before{left:31px}
+  .ev:first-child::before{top:32px}.ev:last-child::before{bottom:calc(100% - 32px)}
+  .art{width:64px;height:64px;padding:7px;border-radius:14px}
+  .ev .t{min-height:84px}
+}
+a:focus-visible{outline:2px solid var(--test);outline-offset:2px}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- small line icons -->
+  <symbol id="brain" viewBox="0 0 24 24"><path d="M12 4.5A3 3 0 0 0 7 5a3 3 0 0 0-2.5 4.5A3 3 0 0 0 5 14.5a3 3 0 0 0 2.5 4A3 3 0 0 0 12 20z"/><path d="M12 4.5A3 3 0 0 1 17 5a3 3 0 0 1 2.5 4.5A3 3 0 0 1 19 14.5a3 3 0 0 1-2.5 4A3 3 0 0 1 12 20z"/><path d="M9 10c1 0 2 1 3 1M15 10c-1 0-2 1-3 1M9 15c1 0 2-1 3-1M15 15c-1 0-2-1-3-1"/></symbol>
+  <symbol id="s-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+  <symbol id="s-scan" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="5"/><circle cx="13.5" cy="11" r="1.6"/></symbol>
+  <symbol id="s-cross" viewBox="0 0 24 24"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></symbol>
+  <symbol id="s-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4.5M12 17.2v.1"/></symbol>
+  <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></symbol>
+  <symbol id="s-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+
+  <!-- illustrations, 64x64 -->
+  <symbol id="seizure" viewBox="0 0 64 64">
+    <path d="M14 56V46C8 41 7 32 10 25C14 13 26 7 37 9C48 11 54 20 52 30L56 37L51 39V44L47 45V56Z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M20 28c1-6 8-9 13-6 5-2 10 2 10 7 2 3 0 8-4 8-2 3-8 3-10 0-5 1-9-2-9-6z" fill="currentColor" fill-opacity=".18"/>
+    <path d="M37 11l-10 15h8l-5 14 13-18h-8z" stroke="none" style="fill:var(--crisis)"/>
+    <path d="M4 18l5 3M2 30l6 1M5 42l5-3" />
+  </symbol>
+  <symbol id="lesion" viewBox="0 0 64 64">
+    <path d="M14 56V46C8 41 7 32 10 25C14 13 26 7 37 9C48 11 54 20 52 30L56 37L51 39V44L47 45V56Z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M20 28c1-6 8-9 13-6 5-2 10 2 10 7 2 3 0 8-4 8-2 3-8 3-10 0-5 1-9-2-9-6z" fill="currentColor" fill-opacity=".18"/>
+    <circle cx="33" cy="30" r="5" stroke="none" style="fill:var(--crisis)"/>
+    <circle cx="33" cy="30" r="9" stroke-dasharray="3 3" style="stroke:var(--crisis)"/>
+  </symbol>
+  <symbol id="mri" viewBox="0 0 64 64">
+    <circle cx="32" cy="28" r="22" fill="currentColor" fill-opacity=".12"/>
+    <circle cx="32" cy="28" r="12" />
+    <circle cx="34" cy="27" r="4" stroke="none" style="fill:var(--crisis)"/>
+    <rect x="12" y="46" width="40" height="7" rx="3.5" fill="currentColor" fill-opacity=".2"/>
+    <path d="M6 58h52"/>
+  </symbol>
+  <symbol id="eye" viewBox="0 0 64 64">
+    <path d="M5 32s10-16 27-16 27 16 27 16-10 16-27 16S5 32 5 32z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M32 16c17 0 27 16 27 16s-10 16-27 16z" stroke="none" style="fill:var(--crisis);fill-opacity:.35"/>
+    <circle cx="32" cy="32" r="8"/><circle cx="32" cy="32" r="3" fill="currentColor" stroke="none"/>
+    <path d="M32 8v6M32 50v6" stroke-dasharray="2 3"/>
+  </symbol>
+  <symbol id="glasses" viewBox="0 0 64 64">
+    <circle cx="18" cy="38" r="11" fill="currentColor" fill-opacity=".12"/><circle cx="46" cy="38" r="11" fill="currentColor" fill-opacity=".12"/>
+    <path d="M29 37c2-2 4-2 6 0M7 36L4 22M57 36l3-14"/>
+    <path d="M13 34l4-3M41 34l4-3" stroke-width="1.6"/>
+    <circle cx="46" cy="38" r="2" stroke="none" style="fill:var(--crisis)"/>
+  </symbol>
+  <symbol id="pills" viewBox="0 0 64 64">
+    <rect x="7" y="22" width="22" height="34" rx="4" fill="currentColor" fill-opacity=".12"/>
+    <rect x="9" y="11" width="18" height="11" rx="3" fill="currentColor" fill-opacity=".25"/>
+    <rect x="12" y="32" width="12" height="12" rx="2"/><path d="M18 35v6M15 38h6"/>
+    <g transform="rotate(-35 46 38)"><rect x="32" y="30" width="28" height="16" rx="8" fill="currentColor" fill-opacity=".12"/><path d="M46 30v16"/><rect x="46" y="30" width="14" height="16" rx="8" stroke="none" fill="currentColor" fill-opacity=".3"/></g>
+  </symbol>
+  <symbol id="fist" viewBox="0 0 64 64">
+    <path d="M14 30h30a8 8 0 0 1 8 8v8a12 12 0 0 1-12 12H26a12 12 0 0 1-12-12z" fill="currentColor" fill-opacity=".14"/>
+    <path d="M23 30v11M32 30v11M41 30v11M14 38h-3a4 4 0 0 0 0 8h3"/>
+    <path d="M38 5l6 6-14 14-8 2 2-8z" fill="currentColor" fill-opacity=".2"/>
+    <path d="M6 56c4-3 6 3 10 0" stroke-width="1.8"/>
+  </symbol>
+  <symbol id="craniotomy" viewBox="0 0 64 64">
+    <path d="M14 58V48C8 43 7 34 10 27C13 15 25 9 36 11C47 13 53 22 51 32L55 39L50 41V46L46 47V58Z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M19 22c6-6 15-8 23-4l-2 8c-7-3-13-2-19 3z" stroke="none" style="fill:var(--crisis);fill-opacity:.45"/>
+    <path d="M12 14c6-7 14-10 22-8l-1 9c-6-2-12 0-17 6z" transform="rotate(-22 24 14) translate(-4 -6)" fill="currentColor" fill-opacity=".3"/>
+    <path d="M38 12c4 1 7 3 9 6" stroke-dasharray="2 3"/>
+  </symbol>
+  <symbol id="slide" viewBox="0 0 64 64">
+    <g transform="rotate(-14 30 28)">
+      <rect x="4" y="14" width="52" height="26" rx="3" fill="currentColor" fill-opacity=".12"/>
+      <path d="M14 27c0-7 9-9 14-5 4-4 12-1 12 5 4 3 1 8-4 9-3 3-9 3-11 0-6 2-12-2-11-9z" style="fill:var(--treat);fill-opacity:.35"/>
+      <circle cx="24" cy="28" r="1.6" fill="currentColor" stroke="none"/><circle cx="33" cy="26" r="1.6" fill="currentColor" stroke="none"/><circle cx="31" cy="33" r="1.6" fill="currentColor" stroke="none"/>
+      <rect x="40" y="18" width="12" height="18" rx="1.5" stroke-width="1.6"/>
+    </g>
+    <circle cx="42" cy="46" r="10" style="fill:var(--card)" fill-opacity=".9"/><circle cx="42" cy="46" r="10"/><path d="M49 53l9 8"/>
+    <circle cx="39" cy="44" r="2" stroke="none" fill="currentColor"/><circle cx="45" cy="48" r="2" stroke="none" fill="currentColor"/>
+  </symbol>
+  <symbol id="dna" viewBox="0 0 64 64">
+    <path d="M20 5c0 13 24 15 24 27s-24 14-24 27"/><path d="M44 5c0 13-24 15-24 27s24 14 24 27"/>
+    <path d="M24 13h16M22 22h20M22 42h20M24 51h16" stroke-width="1.8"/>
+    <circle cx="32" cy="32" r="6" stroke="none" style="fill:var(--crisis)"/>
+    <path d="M52 30h6M55 27v6" stroke-width="2"/>
+  </symbol>
+  <symbol id="fork" viewBox="0 0 64 64">
+    <path d="M32 60V38M32 38L15 22M32 38L49 22"/>
+    <path d="M13 31l2-9 9 2M51 31l-2-9-9 2"/>
+    <g transform="rotate(-35 15 10)"><rect x="4" y="4" width="22" height="12" rx="6" fill="currentColor" fill-opacity=".14"/><path d="M15 4v12"/></g>
+    <path d="M49 1c5 6 8 9 8 13a8 8 0 0 1-16 0c0-4 3-7 8-13z" fill="currentColor" fill-opacity=".14"/>
+  </symbol>
+  <symbol id="trial" viewBox="0 0 64 64">
+    <rect x="9" y="9" width="32" height="46" rx="4" fill="currentColor" fill-opacity=".12"/>
+    <path d="M18 9h14v7H18z" fill="currentColor" fill-opacity=".25"/>
+    <path d="M16 30l5 5 9-10M16 45h18"/>
+    <g transform="rotate(-35 48 46)"><rect x="35" y="40" width="26" height="13" rx="6.5" fill="currentColor" fill-opacity=".14" style="fill:var(--card)"/><rect x="35" y="40" width="26" height="13" rx="6.5"/><path d="M48 40v13"/></g>
+  </symbol>
+  <symbol id="drop" viewBox="0 0 64 64">
+    <path d="M30 5c10 12 16 20 16 30a16 16 0 0 1-32 0c0-10 6-18 16-30z" fill="currentColor" fill-opacity=".14"/>
+    <text x="30" y="42" text-anchor="middle" font-size="16" font-weight="700" font-family="Space Grotesk, Inter, sans-serif" fill="currentColor" stroke="none">Na</text>
+    <path d="M55 22v22M49 38l6 6 6-6" style="stroke:var(--crisis)"/>
+  </symbol>
+  <symbol id="icu" viewBox="0 0 64 64">
+    <rect x="32" y="5" width="26" height="19" rx="3" fill="currentColor" fill-opacity=".12"/>
+    <path d="M36 15h5l3-6 4 11 3-5h4" style="stroke:var(--crisis)"/>
+    <rect x="4" y="42" width="54" height="8" rx="2" fill="currentColor" fill-opacity=".2"/>
+    <path d="M8 50v8M54 50v8"/>
+    <circle cx="14" cy="33" r="5.5" fill="currentColor" fill-opacity=".12"/>
+    <path d="M21 42v-5c0-4 4-5 10-5h14c6 0 9 3 9 8v2" fill="currentColor" fill-opacity=".12"/>
+    <path d="M17 31c5-3 8-6 8-12" style="stroke:var(--test)"/>
+  </symbol>
+  <symbol id="shunt" viewBox="0 0 64 64">
+    <circle cx="22" cy="17" r="12" fill="currentColor" fill-opacity=".12"/>
+    <path d="M16 15c1-4 6-5 9-3 3-1 6 1 6 4M16 20c3 3 8 3 12 0" stroke-width="1.8"/>
+    <path d="M10 34h24v22a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M23 15c14-2 22 8 18 19-3 8-11 11-17 17" stroke-width="3" style="stroke:var(--test)"/>
+    <circle cx="24" cy="51" r="2.5" stroke="none" style="fill:var(--test)"/>
+    <rect x="31" y="9" width="8" height="7" rx="2" stroke="none" style="fill:var(--test)"/>
+    <path d="M50 6c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6z" stroke-width="1.6" fill="currentColor" fill-opacity=".2"/>
+  </symbol>
+  <symbol id="ngtube" viewBox="0 0 64 64">
+    <path d="M14 58V48C8 43 7 34 10 27C13 15 25 9 36 11C47 13 53 22 51 32L55 39L50 41V46L46 47V58Z" fill="currentColor" fill-opacity=".12"/>
+    <path d="M31 27h7M25 27h2" stroke-width="2"/>
+    <path d="M52 37c7 3 7 9 1 12" stroke-width="2.6" style="stroke:var(--test)"/>
+    <rect x="40" y="49" width="17" height="12" rx="3" style="fill:var(--test);fill-opacity:.35;stroke:var(--test)"/>
+    <path d="M20 14l3-4M27 11l1-5" stroke-width="1.8"/>
+  </symbol>
+  <symbol id="wake" viewBox="0 0 64 64">
+    <path d="M5 44s10-14 27-14 27 14 27 14-10 14-27 14S5 44 5 44z" fill="currentColor" fill-opacity=".12"/>
+    <circle cx="32" cy="44" r="8"/><circle cx="32" cy="44" r="3.2" fill="currentColor" stroke="none"/>
+    <path d="M32 4v9M14 10l5 7M50 10l-5 7M5 24l8 3M59 24l-8 3"/>
+  </symbol>
+  <symbol id="eat" viewBox="0 0 64 64">
+    <path d="M6 34h46c0 13-10 22-23 22S6 47 6 34z" fill="currentColor" fill-opacity=".14"/>
+    <path d="M18 28c-3-4 3-6 0-11M28 28c-3-4 3-6 0-11M38 28c-3-4 3-6 0-11"/>
+    <circle cx="53" cy="12" r="6" fill="currentColor" fill-opacity=".2"/><path d="M52 18l-9 24"/>
+  </symbol>
+  <symbol id="report" viewBox="0 0 64 64">
+    <rect x="10" y="5" width="36" height="52" rx="3" fill="currentColor" fill-opacity=".12"/>
+    <path d="M17 16h22M17 24h22M17 32h12"/>
+    <circle cx="44" cy="46" r="11" style="fill:var(--card)"/><circle cx="44" cy="46" r="11"/>
+    <circle cx="41" cy="44" r="3.4" style="fill:var(--treat);fill-opacity:.4"/><circle cx="47" cy="49" r="2.4" style="fill:var(--treat);fill-opacity:.4"/>
+  </symbol>
+  <symbol id="rehab" viewBox="0 0 64 64">
+    <circle cx="26" cy="9" r="5" fill="currentColor" fill-opacity=".2"/>
+    <path d="M26 15v19M26 20l-9 9M26 21l19 5M26 34l-8 18M26 34l10 13"/>
+    <path d="M45 18v38M58 18v38M45 22h13"/>
+    <path d="M3 58h58"/>
+    <path d="M8 40l-4 4 4 4" stroke-width="1.8"/>
+  </symbol>
+  <symbol id="hand" viewBox="0 0 64 64">
+    <path d="M18 34V14a4 4 0 0 1 8 0v16M26 30V9a4 4 0 0 1 8 0v21M34 30V13a4 4 0 0 1 8 0v22M18 34l-5-5a4 4 0 0 0-6 5l11 18h20a12 12 0 0 0 12-12V31a4 4 0 0 0-8 0" fill="currentColor" fill-opacity=".12"/>
+    <path d="M54 8a10 10 0 0 1 4 8M58 4a14 14 0 0 1 4 14" stroke-width="1.8"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="mark"><svg class="i"><use href="#brain"/></svg></div>
+    <div>
+      <h1>Case timeline, 2023 to 2026</h1>
+      <p class="sub">A child's journey with a brain lesion (pediatric low-grade glioma), from the first seizure to recovery.</p>
+    </div>
+  </div>
+
+  <div class="strip" id="strip" aria-label="Phases, widths proportional to months"></div>
+  <div class="axis"><span>Sep 2023</span><span>Jan 2025</span><span>Mar 2026</span><span>Nov 2026</span></div>
+
+  <div class="legend" id="legend" role="group" aria-label="Filter by type"></div>
+
+  <div id="phases"></div>
+
+  <div class="now c-recover">
+    <svg class="i big"><use href="#s-sun"/></svg>
+    <div><h3>Today</h3><p>Stable, slow recovery. Physiotherapy, occupational therapy and speech, facial and physical recovery work continue.</p></div>
+  </div>
+</div>
+
+<script>
+/* phase = [id, title, dates, headerIcon, colour, months, strip label, events]
+   event = [illustration, date, headline, detail, chips[], colour?] */
+var P = [
+ ["p1","Onset","Sep to Nov 2023","s-bolt","symptom",4,"Onset",[
+  ["seizure","Sep to Nov 2023","Focal seizures begin and worsen, leading to the MRI","Lasts 1 to 2 minutes: aura of burning smell, urge to vomit, lip smacking, later left-side lip twitching, wide eyes, loss of speech and nausea afterward. GI, ENT and pediatric visits found nothing, so a neurologist and MRI followed.",["1 to 2 a month","Once a week","1 to 2 a week"]]]],
+ ["p2","Diagnosis and wait-and-watch","2024","s-scan","test",12,"Diagnosis, watch",[
+  ["lesion","Jan 2024","Neurologist and MRI","MRI suggests a lesion in the midbrain-temporal lobe. Neurosurgeons had varying opinions because of the complex location, and mostly advised wait, watch and compare.",[],"test"],
+  ["pills","Jan 2024","Levetiracetam started","Did not help control the seizures.",[],"treat"],
+  ["eye","Feb 2024","Neuro-ophthalmology check","Vision and fundus normal. Visual field affected on the right side: right homonymous hemianopia.",[],"test"],
+  ["mri","Apr 2024","MRI compared with January: lesion static","Seizures still happening. Neurosurgeons offered a biopsy, direct chemotherapy, or continued watching. Family chose wait and watch.",[],"test"],
+  ["mri","Jul 2024","MRI: no significant difference","Continued wait and watch.",[],"test"],
+  ["pills","Aug 2024","Seizures controlled to zero","Finally controlled with two drugs.",["Clobazam 5 mg, once a day","Carbamazepine 200 mg, twice a day"],"treat"],
+  ["glasses","Sep 2024","Eyesight worsens","Right visual field still affected. Eyesight degraded, mostly in the left eye, which intermittently squints outward. Spectacles started. MRI: no significant difference, keep watching.",[],"symptom"],
+  ["fist","Dec 2024","Right hand kept in a fist, handwriting declines","MRI again unchanged; continue wait and watch.",[],"symptom"]]],
+ ["p3","Surgery, pathology, trial","Mar 2025 to Feb 2026","s-cross","treat",14,"Surgery, trial",[
+  ["fist","Mar 2025","Right hand used less","Seizure auras return, but no actual seizures.",[],"symptom"],
+  ["craniotomy","Apr 2025","Left pterional craniotomy","Microsurgical excision of a mesial temporal space-occupying lesion. Only about 20% could be removed. The other 80% stayed because of its closeness to the optic nerves.",["About 20% removed"]],
+  ["eye","Apr 2025","After surgery","Slight relief in the left-eye squint, still intermittent (possibly from pressure relief). Right hand still used less, fist mostly closed. Vision still affected.",[],"symptom"],
+  ["slide","Jul 2025","Tissue sample sent to two labs","Oncology reports came back for two parts of the tissue. IHC, FISH and MGMT showed nothing, and the advanced NGS panel from TATA was negative.",["IHC negative","FISH negative","MGMT negative","TATA NGS negative"],"test"],
+  ["dna","Jul 2025","DBN1/BRAF fusion found","Positive on the advanced NGS panel from Medgenome.",["DBN1/BRAF fusion"],"test"],
+  ["fork","Aug 2025","Choosing a treatment","Several oncologists, differing opinions. Some suggested targeted therapy (tovorafenib for BRAF, or trametinib for MEK), others chemotherapy (V+C, or vinblastine). Physiotherapy for hand and fingers under way.",["Targeted therapy","Chemotherapy"]],
+  ["trial","Oct 2025","Enrolled in tovorafenib Phase 2 trial","",[]],
+  ["pills","Nov 2025 to Feb 2026","Seizure drugs switched","Existing epilepsy drugs did not suit chemo and worked less well with the trial drug, so they were tapered and replaced.",["Lacosamide 100 mg, twice a day","Brivaracetam 15 mg, twice a day","Clobazam 1.25 mg, at night"]]]],
+ ["p4","Trial side effects and emergency","Mar to May 2026","s-alert","crisis",3,"Crisis",[
+  ["pills","20 Mar to 20 Apr 2026","Tovorafenib 350 mg, once a week for 4 weeks","Neurological symptoms began: right hand and grip weaker, right-eye vision drastically reduced, throat ulcer, low sodium and drowsiness. Appetite fell to 25% of normal.",["Weight 22 kg to 20 kg"],"symptom"],
+  ["drop","20 Apr to 20 May","Unbearable headache, sodium falls","The headache did not stop with ibuprofen or paracetamol.",["Sodium 125"]],
+  ["icu","24 Apr","Admitted to hospital","Admitted for osmosis problems and high ICP (pressure inside the skull). Elective ventilator that evening."],
+  ["shunt","25 and 27 Apr","Hydrocephalus, then VP shunt","CT on the 25th showed obstructive hydrocephalus, with an episode of neuropraxia / stroke. VP shunt placed on the 27th.",[]],
+  ["craniotomy","28 and 29 Apr","Extubated, then craniotomy","28 Apr: extubated, but right side weak and unable to speak. 29 Apr: craniotomy. 1 May: extubated again.",[]],
+  ["ngtube","15 May","Discharged home","Still not fully conscious. Eyes not opening, right-side hemiparesis, no speech, no swallowing, fed by NG tube. Home physiotherapy, sodium management and tube feeds began.",[],"crisis"]]],
+ ["p5","Recovery","May to Nov 2026","s-heart","recover",6,"Recovery",[
+  ["wake","20 May to 20 Jun","Awake, eyes open","Memory retained. Conversations began, mostly reactive. Electrolytes stable.",[]],
+  ["eat","May to Jun 2026","NG tube out, eating by mouth","Started walking. Overall weakness and low strength. Right hand and leg not fully recovered, fine finger movements not yet back, right facial muscles still recovering.",[]],
+  ["report","21 Jun 2026","Craniotomy tissue reports ready","Seeking further treatment advice. Physiotherapy, occupational therapy, and speech, facial and physical recovery under way.",[],"test"],
+  ["slide","Jul 2026","Final pathology","Supratentorial / MC pilocytic astrocytoma, a pediatric low-grade glioma (pLGG).",["BRAF fusion","PIK3CA p.Glu545Lys (missense)","CDKN2A/B hemizygous deletion"],"test"],
+  ["rehab","Oct 2026 to date","Stable, steady recovery","Slow gains in fine right-finger movement and strength, right facial muscles and right leg finger strength. Everything else has recovered: daily activity and conversation like any other child, self-independent.",[]]]]
+];
+function ic(n){return '<svg class="i"><use href="#'+n+'"/></svg>'}
+var KINDS=[['symptom','Symptoms'],['test','Scans and tests'],['treat','Treatment'],['crisis','Emergency'],['recover','Recovery']];
+var cur='all';
+function render(){
+ var s='',h='';
+ P.forEach(function(p){
+  var shown=p[7].filter(function(e){return cur==='all'||(e[5]||p[4])===cur});
+  s+='<a href="#'+p[0]+'" class="c-'+p[4]+(shown.length?'':' off')+'" style="flex:'+p[5]+'"><div class="seg">'+ic(p[3])+'</div><div class="lbl">'+p[6]+'</div></a>';
+  if(!shown.length)return;
+  h+='<section class="phase c-'+p[4]+'" id="'+p[0]+'"><h2><span class="big">'+ic(p[3])+'</span><span>'+p[1]+'<small>'+p[2]+'</small></span></h2><div class="evs">';
+  shown.forEach(function(e){
+    var k=e[5]||p[4], chips=(e[4]||[]).map(function(c){return '<span>'+c+'</span>'}).join('');
+    h+='<div class="ev c-'+k+'"><div class="art"><svg class="ill"><use href="#'+e[0]+'"/></svg></div><div class="t"><div class="d">'+e[1]+'</div><strong>'+e[2]+'</strong>'+(e[3]?'<p>'+e[3]+'</p>':'')+(chips?'<div class="chips">'+chips+'</div>':'')+'</div></div>';
+  });
+  h+='</div></section>';
+ });
+ document.getElementById('strip').innerHTML=s;
+ document.getElementById('phases').innerHTML=h;
+ document.querySelectorAll('#legend button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===cur?'true':'false')});
+}
+var total=0,counts={};
+P.forEach(function(p){p[7].forEach(function(e){var k=e[5]||p[4];counts[k]=(counts[k]||0)+1;total++})});
+var lg='<button type="button" class="all" data-k="all"><i></i>All <em>'+total+'</em></button>';
+KINDS.forEach(function(k){lg+='<button type="button" class="c-'+k[0]+'" data-k="'+k[0]+'"><i></i>'+k[1]+' <em>'+(counts[k[0]]||0)+'</em></button>'});
+var L=document.getElementById('legend');L.innerHTML=lg;
+L.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;cur=b.dataset.k;render()});
+render();
+</script>
+
+</body></html>
